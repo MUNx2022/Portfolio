@@ -1,0 +1,15 @@
+<svg width="48" height="40" viewBox="0 0 48 40" fill="none"
+     xmlns="http://www.w3.org/2000/svg">
+
+  <!-- Folder back -->
+  <path d="M2 10 H18 L22 6 H46 V36 H2 Z"
+        stroke="#F1A510"
+        stroke-width="2"
+        fill="none"/>
+
+  <!-- Folder front -->
+  <path d="M2 14 H46 V36 H2 Z"
+        stroke="#F1A510"
+        stroke-width="2"
+        fill="none"/>
+</svg>
