@@ -84,26 +84,221 @@ h1 {
   margin-bottom: 40px;
 }
 
-.hero-text p {
-  margin-bottom: 1.6rem;   /* antes suele ser ~1rem */
-  line-height: 1.7;       /* mejora legibilidad */
-  max-width: 52ch;       /* para que no se haga muy ancho */
+/* ===== HOME redesign ===== */
+#home {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 85vh;
+  text-align: center;
+  padding: 20px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ===== Pixel stars ===== */
+#home .stars-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Each star is a tiny box-shadow cluster on a 1px element */
+#home .stars-layer::before,
+#home .stars-layer::after {
+  content: "";
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: transparent;
+  image-rendering: pixelated;
+  animation: starDrift 60s linear infinite;
+}
+
+#home .stars-layer::before {
+  box-shadow:
+    80px  40px 0 1px rgba(255,255,255,0.9),
+    200px 120px 0 0px rgba(255,255,255,0.7),
+    340px  60px 0 1px rgba(255,255,255,0.85),
+    480px 200px 0 0px rgba(255,255,255,0.6),
+    600px  30px 0 1px rgba(255,255,255,0.9),
+    720px 160px 0 0px rgba(255,255,255,0.75),
+    860px  90px 0 1px rgba(255,255,255,0.8),
+    980px 250px 0 0px rgba(255,255,255,0.65),
+   1100px  50px 0 1px rgba(255,255,255,0.9),
+    140px 300px 0 0px rgba(255,255,255,0.7),
+    270px 380px 0 1px rgba(255,255,255,0.85),
+    420px 450px 0 0px rgba(255,255,255,0.6),
+    560px 320px 0 1px rgba(255,255,255,0.8),
+    690px 420px 0 0px rgba(255,255,255,0.75),
+    820px 360px 0 1px rgba(255,255,255,0.9),
+    950px 480px 0 0px rgba(255,255,255,0.65),
+   1080px 390px 0 1px rgba(255,255,255,0.8),
+     30px 500px 0 0px rgba(255,255,255,0.7),
+    310px 550px 0 1px rgba(255,255,255,0.85),
+    650px 530px 0 0px rgba(255,255,255,0.6),
+    900px 570px 0 1px rgba(255,255,255,0.9),
+   1150px 510px 0 0px rgba(255,255,255,0.7);
+  animation-duration: 70s;
+}
+
+#home .stars-layer::after {
+  box-shadow:
+    160px  80px 0 1px rgba(255,255,255,0.7),
+    300px 180px 0 0px rgba(255,255,255,0.85),
+    440px 100px 0 1px rgba(255,255,255,0.65),
+    580px 260px 0 0px rgba(255,255,255,0.9),
+    700px  70px 0 1px rgba(255,255,255,0.75),
+    840px 210px 0 0px rgba(255,255,255,0.8),
+   1020px 140px 0 1px rgba(255,255,255,0.7),
+     60px 340px 0 0px rgba(255,255,255,0.85),
+    230px 430px 0 1px rgba(255,255,255,0.65),
+    390px 490px 0 0px rgba(255,255,255,0.9),
+    530px 370px 0 1px rgba(255,255,255,0.8),
+    760px 460px 0 0px rgba(255,255,255,0.7),
+    910px 410px 0 1px rgba(255,255,255,0.85),
+   1060px 350px 0 0px rgba(255,255,255,0.65),
+    110px 560px 0 1px rgba(255,255,255,0.9),
+    450px 580px 0 0px rgba(255,255,255,0.75),
+    780px 540px 0 1px rgba(255,255,255,0.8),
+   1120px 560px 0 0px rgba(255,255,255,0.7);
+  animation-duration: 90s;
+  animation-delay: -30s;
+}
+
+/* twinkle: some stars pulse with cross shape using filter */
+#home .stars-twinkle {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* pixel-cross stars via clip-path + animation */
+.star-px {
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  background: white;
+  clip-path: polygon(
+    40% 0%, 60% 0%,
+    60% 40%, 100% 40%, 100% 60%,
+    60% 60%, 60% 100%, 40% 100%,
+    40% 60%, 0% 60%, 0% 40%,
+    40% 40%
+  );
+  animation: twinkle 3s ease-in-out infinite;
+  image-rendering: pixelated;
+}
+
+.star-px.s1  { top:  8%; left: 12%; animation-delay: 0s;    animation-duration: 2.8s; opacity: 0.9; }
+.star-px.s2  { top: 15%; left: 55%; animation-delay: 1.2s;  animation-duration: 3.5s; opacity: 0.8; width: 9px; height: 9px; }
+.star-px.s3  { top: 25%; left: 80%; animation-delay: 0.5s;  animation-duration: 2.5s; opacity: 0.85; }
+.star-px.s4  { top: 60%; left:  8%; animation-delay: 2s;    animation-duration: 4s;   opacity: 0.75; width: 5px; height: 5px; }
+.star-px.s5  { top: 70%; left: 70%; animation-delay: 0.8s;  animation-duration: 3.2s; opacity: 0.9; width: 9px; height: 9px; }
+.star-px.s6  { top: 45%; left: 92%; animation-delay: 1.8s;  animation-duration: 2.7s; opacity: 0.8; }
+.star-px.s7  { top: 80%; left: 35%; animation-delay: 0.3s;  animation-duration: 3.8s; opacity: 0.85; width: 5px; height: 5px; }
+.star-px.s8  { top:  5%; left: 90%; animation-delay: 2.5s;  animation-duration: 3s;   opacity: 0.7; }
+.star-px.s9  { top: 88%; left: 88%; animation-delay: 1s;    animation-duration: 2.6s; opacity: 0.9; width: 9px; height: 9px; }
+.star-px.s10 { top: 35%; left: 22%; animation-delay: 3s;    animation-duration: 4.2s; opacity: 0.75; }
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.15; transform: scale(0.8); }
+  50%       { opacity: 1;    transform: scale(1.15); }
+}
+
+@keyframes starDrift {
+  from { transform: translateY(0); }
+  to   { transform: translateY(-40px); }
+}
+
+/* make sure content sits above stars */
+#home > *:not(.stars-layer):not(.stars-twinkle) {
+  position: relative;
+  z-index: 1;
+}
+
+#home h1 {
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+  letter-spacing: 0.04em;
+  margin-bottom: 8px;
+  /* subtle gold glow */
+  text-shadow: 0 0 40px rgba(241,165,16,0.18);
+}
+
+#home .subtitle {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.95rem;
+  letter-spacing: 0.1em;
+  color: #906bc5;
+  margin-bottom: 48px;
+  text-transform: uppercase;
+}
+
+/* decorative line above name */
+#home::before {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 2px;
+  background: #f1a510;
+  margin: 0 auto 32px;
+  box-shadow: 0 0 14px rgba(241,165,16,0.5);
 }
 
 .home-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  width: 100%;
+}
+
+.hero-text {
+  max-width: 640px;
+  text-align: left;
+  border-left: 2px solid rgba(241,165,16,0.35);
+  padding-left: 24px;
+  position: relative;
+}
+
+/* decorative corner accent */
+.hero-text::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: -2px;
+  width: 2px;
+  height: 10px;
+  background: #f1a510;
+  box-shadow: 0 0 10px rgba(241,165,16,0.6);
+}
+
+.hero-text p {
+  margin-bottom: 1.4rem;
+  line-height: 1.75;
+  color: rgba(242,242,242,0.88);
+  font-size: 0.97rem;
+}
+
+.hero-text p:last-child {
+  margin-bottom: 0;
+}
+
+/* hide the old media column */
+.home-media {
+  display: none;
+}
+
+.home-text {
+  display: flex;
+  justify-content: center;
 }
 
 .media-frame {
-  border: 2px solid #f1a510;
-  height: 250px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #f1a510;
-  font-family: 'Share Tech Mono', monospace;
+  display: none;
 }
 
 .folders {
@@ -342,7 +537,7 @@ h1 {
 
 .pdf-placeholder, .media-placeholder {
   padding: 14px 12px;
-  height: 260px;
+  height: 360px;
   display: grid;
   place-items: center;
   color: rgba(242,242,242,0.65);
@@ -360,7 +555,7 @@ h1 {
 
 /* Biomimetics (amethyst) */
 .tab-small[data-tag="bio"] {
-  background: #995CD0;
+  background: #5aa784;
   color: #f2f2f2;
 }
 
@@ -412,7 +607,35 @@ h1 {
   box-shadow: 0 6px 18px rgba(0,0,0,0.30);
 }
 
-/* ---------- CV + Contact ---------- */
+/* ---------- PDF toggle (dual-PDF projects) ---------- */
+.pdf-toggle {
+  display: flex;
+  gap: 6px;
+}
+
+.pdf-toggle-btn {
+  background: transparent;
+  border: 1px solid rgba(241,165,16,0.35);
+  color: rgba(242,242,242,0.7);
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  padding: 5px 10px;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: border-color 0.15s, color 0.15s;
+}
+
+.pdf-toggle-btn:hover {
+  border-color: rgba(241,165,16,0.7);
+  color: #f1a510;
+}
+
+.pdf-toggle-btn.active {
+  border-color: #f1a510;
+  color: #f1a510;
+  box-shadow: 0 0 10px rgba(241,165,16,0.15);
+}
 .cv-wrap {
   max-width: 1200px;
   margin: 0 auto;
